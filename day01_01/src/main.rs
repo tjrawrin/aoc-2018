@@ -1,23 +1,27 @@
+use day01_01::find_frequency;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
+use std::env;
 
 fn main() {
-	// Set the current frequency to a starting point of 0
-	let mut current_frequency = 0;
+	// Current frequency
+	let mut frequency = 0;
 
-	// Open the input file or display an error if the file failed to open
-	let file = File::open("input.txt").expect("Unable to open the file!");
-	// Create a vector of numbers based on each line in the opened input file
-	let frequency_changes: Vec<i32> = BufReader::new(file)
-		.lines()
-		.map(|line| line.unwrap().parse::<i32>().unwrap())
-		.collect();
+	// Get command line arguments
+	let args: Vec<String> = env::args().collect();
 
-	// Loop over each frequency change
-	for frequency_change in frequency_changes {
-		// Calculate a new current frequency
-		current_frequency += frequency_change;
+	// Get the filename
+	let filename = &args[1];
+
+	// Open a file containing input values
+	let file = File::open(filename).expect("Unable to open the file!");
+
+	// Read each line and calculate the new frequency
+	for line in BufReader::new(file).lines() {
+		let line = line.unwrap().parse::<i32>().unwrap();
+		frequency = find_frequency(frequency, line);
 	}
-	// Print the final frequency Result
-	println!("{}", current_frequency);
+
+	// Print the result
+	println!("{}", frequency);
 }
