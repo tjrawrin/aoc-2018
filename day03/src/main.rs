@@ -13,7 +13,6 @@ fn main() {
 	let claims = parse_claims(lines);
 	let areas = get_claim_area(claims);
 	let map = create_claim_map(&areas);
-	println!("{:?}", map);
 
 	// Part 1
 	println!("{:?}", area_claimed_by_two_or_more(&map));
