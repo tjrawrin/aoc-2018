@@ -5,9 +5,7 @@ use std::fs;
 fn main() {
 	let args = env::args().collect::<Vec<String>>();
 	let filename = &args[1];
-
 	let content = fs::read_to_string(filename).expect("Unable to read file");
-
 	let box_ids = content.split('\n').collect::<Vec<&str>>();
 
 	// Part 1
@@ -53,7 +51,6 @@ fn calculate_checksum(ids: Vec<&str>) -> u32 {
 
 	total_count.0 * total_count.1
 }
-
 #[test]
 fn calculate_checksum_test() {
 	let data = vec![
@@ -89,7 +86,6 @@ fn off_by_one_character(ids: Vec<&str>) -> Vec<&str> {
 
 	new_box_ids
 }
-
 #[test]
 fn off_by_one_character_test() {
 	let data = vec![
@@ -110,7 +106,6 @@ fn get_common_characters(ids: Vec<&str>) -> String {
 
 	result.iter().collect::<String>()
 }
-
 #[test]
 fn get_common_characters_test() {
 	assert_eq!(get_common_characters(vec!["fguij", "fghij"]), "fgij");
