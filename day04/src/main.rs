@@ -19,7 +19,7 @@ fn main() {
 
 	let mut guard_id = 0;
 	let mut sleep = 0;
-	let mut wake = 0;
+	let mut wake;
 	let mut naps = vec![];
 
 	for entry in entries {
@@ -27,11 +27,9 @@ fn main() {
 
 		if entry.contains("begins shift") {
 			guard_id = parse_guard(entry);
-		}
-		if entry.contains("falls asleep") {
+		} else if entry.contains("falls asleep") {
 			sleep = minute;
-		}
-		if entry.contains("wakes up") {
+		} else if entry.contains("wakes up") {
 			wake = minute;
 			naps.push(Nap {
 				guard_id,
@@ -94,7 +92,6 @@ fn sleepiest_minute(naps: &[Nap], guard_id: u32) -> u32 {
 }
 
 fn most_frequenty_asleep_minute(naps: &[Nap]) -> (u32, u32) {
-	println!("{:?}", naps);
 	let mut minutes = HashMap::new();
 	for nap in naps {
 		for minute in nap.sleep..nap.wake {
